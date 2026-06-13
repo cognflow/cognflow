@@ -219,7 +219,7 @@ n8nio/n8n
 
 * GitHub: github.com/cognflow
 * LinkedIn: linkedin.com/in/igwe-ogaji
-* Email: [samklinofficial91@gmail.com](mailto:samklinofficial91@gmail.com)
+* Email: samuelaiautomation25@gmail.com
 
 ---
 
