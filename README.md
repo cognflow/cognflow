@@ -1,8 +1,9 @@
-<img width="1536" height="1024" alt="n8n" src="https://github.com/user-attachments/assets/435b0699-f578-41fa-855b-686aa6b6cdb2" />
+
 
 # 👋 Hi, I'm Ogaji Igwe Samuel
 
 ### AI Automation Engineer • n8n Builder • DevOps & Cloud Engineer
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/0f7a190b-5fcf-433f-a4b4-52d74aae10e7" />
 
 I build production-ready AI automation systems using **n8n, Claude, Notion, Slack, Gmail, Cohere, and modern cloud tooling**.
 
