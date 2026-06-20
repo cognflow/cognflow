@@ -5,241 +5,98 @@
 ### AI Automation Engineer • n8n Builder • DevOps & Cloud Engineer
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/0f7a190b-5fcf-433f-a4b4-52d74aae10e7" />
 
-I build production-ready AI automation systems using **n8n, Claude, Notion, Slack, Gmail, Cohere, and modern cloud tooling**.
+# Cognflow
 
-My focus is simple:
+AI business automation engineering. We design and ship production-grade automation systems — not demos — using agentic AI, workflow orchestration platforms, and cloud-native infrastructure.
 
-> Eliminate repetitive business operations with intelligent workflows.
+Built and maintained by [Ogaji igwe samuel](https://github.com/cognflow).
 
-From AI-powered onboarding systems to fully autonomous sales pipelines, I design automations that behave like operational infrastructure — not demos.
+## Philosophy
 
----
+Automation is only valuable when it removes real operational friction. Every system here is built with production-style data, real API integrations, and documented engineering decisions — including the debugging, not just the demo.
 
-# 🚀 Cognflow — n8n Automation Templates
+We build three things:
 
-Production-ready AI-powered workflows built with n8n.
+1. **Workflow automations** in n8n and Make.com — fast to build, easy to hand off, ideal for teams that need automation without a custom backend.
+2. **Standalone backend services** in Python — for cases where a no-code platform's limits matter: custom agentic logic, full infrastructure ownership, or production-grade reliability requirements.
+3. **Cloud infrastructure** — every backend service is deployed with Terraform-managed AWS infrastructure and CI/CD, not manually configured.
 
-### 10 workflows. 1 portfolio. Built from scratch.
+## Repositories
 
-This repository contains the complete **Cognflow AI Automation Portfolio** — a collection of real-world automation systems covering:
+### [n8n-automation-templates](https://github.com/cognflow/n8n-automation-templates)
+10 production-style n8n workflows covering lead capture, client onboarding, support triage, proposal generation, RAG knowledge retrieval, and a fully autonomous AI sales agent.
 
-* AI lead generation
-* Client onboarding
-* Customer support triage
-* Proposal generation
-* RAG knowledge retrieval
-* Autonomous AI sales operations
-* Social media automation
-* Invoice processing
+| Workflow | What it does |
+|---|---|
+| P01 — AI Lead Capture & Response | Qualifies inbound leads with Claude, sends a personalized response automatically |
+| P03 — AI Client Onboarding Engine | Triggers a multi-step onboarding sequence when a client goes active in Notion |
+| P05 — AI Customer Support Triage | Classifies tickets by urgency and category, routes via conditional logic |
+| P08 — AI Proposal Generator | Turns a client brief into a full proposal document, generated and delivered automatically |
+| P09 — RAG Business Knowledge Bot | In-memory RAG system — Cohere embeddings, cosine similarity, no vector database — grounded in a Notion knowledge base |
+| P10 — Autonomous AI Sales Agent | End-to-end: qualifies leads, scores intent, creates CRM records, retrieves SOP context, generates and sends outreach, updates audit trails, fires Slack alerts. No human intervention required. |
 
-Every workflow is:
+**Stack:** n8n, Claude, Notion API, Gmail API, Slack API, Cohere, Google Docs API, Docker.
 
-* Fully documented
-* Built with real APIs
-* Tested with production-style data
-* Ready to import into n8n
+### [make-automation-templates](https://github.com/cognflow/make-automation-templates)
+A second automation portfolio built on Make.com, demonstrating the same patterns on a different orchestration platform.
 
----
+| Module | What it does |
+|---|---|
+| M01 — AI Lead Scoring & CRM Sync | Tally form submissions scored by Claude, synced to an Airtable CRM |
+| M02 — Social Media Content Engine | Generates platform-specific captions (LinkedIn, Instagram, X) from content briefs |
+| M03 — AI Invoice & Payment Tracker | Extracts invoice data from Gmail, logs to Notion and Google Sheets, sends automated payment reminders |
+| M04 — Customer Support Auto-Responder | Classifies and responds to support tickets automatically — also rebuilt standalone, see AutoFlow API below |
 
-# 🧠 Tech Stack
+**Stack:** Make.com, Claude, Airtable, Google Sheets, Notion, Gmail.
 
-| Tool             | Purpose                    |
-| ---------------- | -------------------------- |
-| n8n              | Workflow orchestration     |
-| Anthropic Claude | AI reasoning + generation  |
-| Notion API       | CRM + knowledge base       |
-| Gmail API        | Automated outreach         |
-| Slack API        | Alerts + notifications     |
-| Cohere           | Text embeddings for RAG    |
-| Google Docs API  | Proposal generation        |
-| Docker           | Self-hosted infrastructure |
+### [autoflow-api](https://github.com/cognflow/autoflow-api)
+A standalone, production-grade rebuild of the M04 support automation — built in Python with Claude's agentic tool use, fully infrastructure-as-code on AWS, deployed via CI/CD.
 
----
+A support ticket comes in via webhook → Claude classifies it and decides which tools to call → logs the ticket to Notion → drafts and sends a reply via Amazon SES. No hardcoded branching — the model owns the decision sequence at runtime.
 
-# 📦 Featured Workflows
+**Stack:** FastAPI, Anthropic SDK, PostgreSQL (RDS), Notion API, Amazon SES, ECS Fargate, Terraform, GitHub Actions with OIDC.
 
-## P01 — AI Lead Capture & Response
+This repo exists to demonstrate the difference between orchestrating an automation on a no-code platform and owning the full stack: application code, AI orchestration logic, network architecture, IAM boundaries, and CI/CD — including the real debugging that production infrastructure surfaces and a no-code platform abstracts away.
 
-Receives inbound leads through a webhook, qualifies them with Claude, generates a personalised response email, and sends it automatically.
+## Engineering patterns across all three
 
-**Patterns used**
+- **Agentic AI decision-making** — Claude decides which tools to call and in what order, rather than following a fixed branch structure
+- **Structured JSON outputs** from Claude, parsed and routed programmatically
+- **RAG without managed infrastructure** — in-memory vector search where a full vector database would be overkill
+- **Production-style testing** — every workflow and service tested against realistic data and signed/authenticated requests, not toy inputs
+- **Infrastructure as code** — the AutoFlow API's AWS footprint is fully reproducible and disposable via Terraform
+- **CI/CD without long-lived credentials** — GitHub Actions assumes scoped AWS roles via OIDC, not static access keys
 
-* Prompt engineering
-* API orchestration
-* Automated email workflows
+## Tech stack, org-wide
 
----
+| Category | Tools |
+|---|---|
+| Orchestration | n8n, Make.com |
+| AI | Anthropic Claude (agentic tool use), Cohere (embeddings) |
+| Backend | FastAPI, Python, PostgreSQL |
+| Cloud | AWS (ECS Fargate, RDS, SES, Secrets Manager, VPC), Terraform |
+| CI/CD | GitHub Actions, OIDC federation |
+| Integrations | Notion, Airtable, Gmail, Slack, Google Sheets/Docs |
+| Containerization | Docker |
 
-## P03 — AI Client Onboarding Engine
-
-Triggers automatically when a client becomes active in Notion and launches a multi-step onboarding process.
-
-**Patterns used**
-
-* Stateful workflow sequencing
-* Cross-node data referencing
-* Automated onboarding systems
-
----
-
-## P05 — AI Customer Support Triage
-
-Uses Claude to classify support tickets by urgency and category, then routes them automatically through conditional logic.
-
-**Patterns used**
-
-* Structured JSON prompting
-* Switch node routing
-* AI classification pipelines
-
----
-
-## P08 — AI Proposal Generator
-
-Transforms a client brief into a complete business proposal using Claude, generates a Google Doc, and emails it automatically.
-
-**Patterns used**
-
-* Long-form AI generation
-* Dynamic document creation
-* Automated delivery workflows
-
----
-
-## P09 — RAG Business Knowledge Bot
-
-A fully in-memory RAG system built entirely in n8n — no Pinecone, no LangChain, no vector database.
-
-### Features
-
-* Notion knowledge retrieval
-* Cohere embeddings
-* Cosine similarity search
-* In-memory vector storage
-* Claude grounded responses
-
-**Patterns used**
-
-* Batch embedding requests
-* RAG retrieval pipelines
-* Vector similarity search in JavaScript
-
----
-
-## P10 — Autonomous AI Sales Agent
-
-The flagship Cognflow system.
-
-A complete autonomous sales workflow that:
-
-* Qualifies leads
-* Scores intent
-* Creates CRM records
-* Retrieves SOP context
-* Generates outreach emails
-* Sends emails automatically
-* Updates audit trails
-* Fires Slack alerts
-
-No human intervention required.
-
-### Key Engineering Patterns
-
-* Agentic AI decision pipelines
-* Structured Claude JSON outputs
-* JSON.stringify() payload serialization
-* RAG-assisted outreach generation
-* Full CRM lifecycle automation
-
----
-
-# 🛠 Repository Structure
-
-```bash
-cognflow/n8n-automation-templates/
-├── README.md
-└── workflows/
-    ├── P01-AI-Lead-Capture-Response/
-    ├── P03-AI-Client-Onboarding-Engine/
-    ├── P05-AI-Customer-Support-Triage/
-    ├── P08-AI-Proposal-Generator/
-    ├── P09-RAG-Business-Knowledge-Bot/
-    └── P10-Autonomous-AI-Sales-Agent/
-```
-
-# ⚡ Quick Start
-
-## Run n8n via Docker
+## Quick start — n8n workflows
 
 ```bash
 docker run -it --rm \
---name n8n \
--p 5678:5678 \
--v n8n_data:/home/node/.n8n \
-n8nio/n8n
+  --name n8n \
+  -p 5678:5678 \
+  -v n8n_data:/home/node/.n8n \
+  n8nio/n8n
 ```
 
-## Import a Workflow
+Then import any workflow JSON from `n8n-automation-templates/workflows/` and configure credentials.
 
-1. Open n8n
-2. Create New Workflow
-3. Import from file
-4. Configure credentials
-5. Activate workflow
+## Connect
 
----
+- GitHub: [github.com/cognflow](https://github.com/cognflow)
+- LinkedIn: [linkedin.com/in/igwe-ogaji](https://linkedin.com/in/igwe-ogaji)
+- Email: samklinofficial91@gmail.com
 
-# 🔐 Integrations
-
-### Anthropic Claude
-
-* Header Auth
-* `x-api-key`
-
-### Notion API
-
-* Internal integrations
-* CRM + logging workflows
-
-### Gmail / Slack
-
-* OAuth2 integrations
-* Notification automation
-
----
-
-# 📚 Current Focus
-
-* AI workflow orchestration
-* Agentic automation systems
-* RAG architectures in n8n
-* DevOps + cloud infrastructure
-* AI operations engineering
-
----
-
-# 🌍 Connect With Me
-
-* GitHub: github.com/cognflow
-* LinkedIn: linkedin.com/in/igwe-ogaji
-* Email: samuelaiautomation25@gmail.com
-
----
-
-# 📌 Philosophy
-
-> AI becomes valuable when it removes operational friction.
-
-I don't build AI demos.
-
-I build systems that:
-
-* reduce manual work,
-* improve operational speed,
-* and scale business processes automatically.
-
----
-
-# 📄 License
+## License
 
 MIT — free to use, modify, and distribute.
