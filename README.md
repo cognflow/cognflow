@@ -95,7 +95,7 @@ Then import any workflow JSON from `n8n-automation-templates/workflows/` and con
 
 - GitHub: [github.com/cognflow](https://github.com/cognflow)
 - LinkedIn: [linkedin.com/in/igwe-ogaji](https://linkedin.com/in/igwe-ogaji)
-- Email: samklinofficial91@gmail.com
+- Email: samuelaiautomation25@gmail.com
 
 ## License
 
